@@ -1,0 +1,109 @@
+{
+    "titulo": "Misión 1",
+    "categorias": [
+        {
+            "nombre": "PREPARACIÓN DE LA MISIÓN",
+            "items": [
+                {"nombre": "1.- Briefing", "id": 1, "tipo": "F"},
+                {"nombre": "2.- Conocimientos teóricos", "id": 2, "tipo": "F"},
+                {"nombre": "3.- Análisis meteorológico y NOTAM", "id": 3, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "PUESTA EN MARCHA",
+            "items": [
+                {"nombre": "4.- Revisión de pre-vuelo", "id": 4, "tipo": "F"},
+                {"nombre": "5.- Inspección interior y Exterior", "id": 5, "tipo": "F"},
+                {"nombre": "6.- Procedimiento de puesta en marcha", "id": 6, "tipo": "F"},
+                {"nombre": "7.- Procedimiento de comunicaciones", "id": 7, "tipo": "F"},
+                {"nombre": "8.- Reglaje altimétrico", "id": 8, "tipo": "F"},
+                {"nombre": "9.- Calentamiento de motor", "id": 9, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "TAXEO",
+            "items": [
+                {"nombre": "10.- Velocidad de taxeo", "id": 10, "tipo": "F"},
+                {"nombre": "11.- Dirección de taxeo", "id": 11, "tipo": "F"},
+                {"nombre": "12.- Check de compases", "id": 12, "tipo": "F"},
+                {"nombre": "13.- Control de frenado", "id": 13, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "PRUEBA DE MOTOR",
+            "items": [
+                {"nombre": "14.- Posición", "id": 14, "tipo": "F"},
+                {"nombre": "15.- Prueba de motor", "id": 15, "tipo": "F"},
+                {"nombre": "16.- Configuración para despegue", "id": 16, "tipo": "F"},
+                {"nombre": "17.- Procedimiento de comunicaciones", "id": 17, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "DESPEGUE",
+            "items": [
+                {"nombre": "18.- Chequeo antes del despegue", "id": 18, "tipo": "F"},
+                {"nombre": "19.- Procedimiento de comunicaciones", "id": 19, "tipo": "F"},
+                {"nombre": "20.- Alineación en la pista", "id": 20, "tipo": "F"},
+                {"nombre": "21.- Chequeo en la línea de despegue", "id": 21, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "TAXEO DE REGRESO",
+            "items": [
+                {"nombre": "22.- Procedimiento de comunicaciones", "id": 22, "tipo": "F"},
+                {"nombre": "23.- Check después del aterrizaje", "id": 23, "tipo": "F"},
+                {"nombre": "24.- Prueba de motor", "id": 24, "tipo": "F"},
+                {"nombre": "25.- Velocidad y dirección del taxeo", "id": 25, "tipo": "F"},
+                {"nombre": "26.- Control de frenado", "id": 26, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "CORTE DE MOTOR",
+            "items": [
+                {"nombre": "27.- Procedimiento de comunicaciones", "id": 27, "tipo": "F"},
+                {"nombre": "27.- Estacionamiento del avión", "id": 28, "tipo": "F"},
+                {"nombre": "29.- Corte de motor", "id": 29, "tipo": "F"},
+                {"nombre": "30.- Confección de la bitácora", "id": 30, "tipo": "F"},
+                {"nombre": "31.- Llenado del R.B.I.", "id": 31, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "COMUNICACIONES",
+            "items": [
+                {"nombre": "32.- Fluidez", "id": 32, "tipo": "F/C"},
+                {"nombre": "33.- Fraseología aeronáutica", "id": 33, "tipo": "F"},
+                {"nombre": "34.- Read-back, orden y estructura", "id": 34, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "USO DE COMPENSADORES",
+            "items": [
+                {"nombre": "35.- Antes de despegar", "id": 35, "tipo": "F"},
+                {"nombre": "36.- Posterior al aterrizaje", "id": 36, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "CHEQUEOS",
+            "items": [
+                {"nombre": "37.- Uso de lista de verificación", "id": 37, "tipo": "F"},
+                {"nombre": "38.- Chequeo de 15 minutos", "id": 38, "tipo": "F"}
+            ]
+        },
+        {
+            "nombre": "ACTITUDINALES Y OTROS",
+            "items": [
+                {"nombre": "39.- CRM", "id": 39, "tipo": "F"},
+                {"nombre": "40.- Criterio y toma de decisiones", "id": 40, "tipo": "F"},
+                {"nombre": "41.- Conciencia situacional", "id": 41, "tipo": "F"},
+                {"nombre": "42.- Análisis de error y correcciones", "id": 42, "tipo": "F"},
+                {"nombre": "43.- Agresividad", "id": 43, "tipo": "F"},
+                {"nombre": "44.- Autocontrol", "id": 44, "tipo": "F"},
+                {"nombre": "45.- Resiliencia", "id": 45, "tipo": "F"},
+                {"nombre": "46.- Manejo de variables múltiples", "id": 46, "tipo": "F"},
+                {"nombre": "47.- Aclaradas de área", "id": 47, "tipo": "F"},
+                {"nombre": "48.- Actitud hacia la instrucción", "id": 48, "tipo": "F"},
+                {"nombre": "49.- Debriefing", "id": 49, "tipo": "F"}
+            ]
+        }
+    ]
+}

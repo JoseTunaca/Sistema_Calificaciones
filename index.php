@@ -34,17 +34,31 @@
         .login-form {
             text-align: center;
         }
+
+        .error-message {
+            color: red;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="login-container">
         <div class="login-form">
             <h1 class="text-primary">Login</h1>
+            
+            <!-- Mostrar mensaje de error aquí -->
+            <?php
+            session_start();
+            if (isset($_SESSION['error_message'])) {
+                echo '<div class="error-message">' . $_SESSION['error_message'] . '</div>';
+                unset($_SESSION['error_message']); // Limpia la variable de sesión del mensaje de error
+            }
+            ?>
+
             <form action="login.php" method="POST">
                 <div class="mb-3">
                     <label for="user" class="form-label">Usuario</label>
-                    <input type="text" class="form-control" id="user" name="user" > 
-
+                    <input type="text" class="form-control" id="rut" name="rut"> 
                 </div>
                 <div class="mb-3">
                     <label for="pass" class="form-label">Contraseña</label>
@@ -57,4 +71,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

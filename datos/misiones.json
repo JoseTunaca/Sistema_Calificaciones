@@ -1,0 +1,12 @@
+{
+    "1": {
+        "maneuver1": "Descripción de la maniobra 1 en TRB-1",
+        "maneuver2": "Descripción de la maniobra 2 en TRB-1",
+        "maneuver3": "Descripción de la maniobra 3 en TRB-1"
+    },
+    "2": {
+        "maneuver1": "Descripción de la maniobra 1 en TRB-2",
+        "maneuver2": "Descripción de la maniobra 2 en TRB-2",
+        "maneuver3": "Descripción de la maniobra 3 en TRB-2"
+    }
+}

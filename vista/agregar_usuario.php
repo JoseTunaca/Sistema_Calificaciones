@@ -107,6 +107,7 @@ if ($rol_db == 1) { // Rol Admin
     <select name="rol" required>
         <option value="1">1</option>
         <option value="2">2</option>
+        <option value="3">3</option>
     </select>
 </label><br>
 <div class="message-container">

@@ -33,11 +33,11 @@ $rol_db = $_SESSION['rol'];
     
     <?php
     if ($rol_db == 1) { // Rol Admin
-        echo '<a href="panel.php">Inicio</a>';
+        echo '<a href="administrador.php">Inicio</a>';
         echo '<a href="usuario.php">Usuarios</a>';
         echo '<a href="ad_calificacion.php">Calificación</a>';
     }elseif($rol_db == 2) {
-        echo '<a href="user.php">Inicio</a>';
+        echo '<a href="instructor.php">Inicio</a>';
         echo '<a href="calificacion.php">Calificación</a>';
     }
     

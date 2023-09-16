@@ -1,0 +1,195 @@
+.eliminar-seleccion {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+
+/* Estilos para el título "Calificación de Vuelo" */
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-top: 20px;
+    color: #df2222;
+}
+
+/* Estilos para el nombre del instructor */
+h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Estilos para las filas de título en la tabla de calificación */
+table th {
+    background-color: #6eb0ee;
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+}
+
+/* Estilos para los botones "Calcular Calificación" y "Guardar Calificación" */
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Cambia el color de fondo cuando se pasa el mouse sobre los botones */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el cuadro de texto de estado */
+#estadoCalificacion {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #111010;
+}
+
+#estadoCalificacion.verde {
+    background-color: green;
+    color: white;
+}
+
+#estadoCalificacion.rojo {
+    background-color: red;
+    color: white;
+}
+
+#estadoCalificacion.amarillo {
+    background-color: yellow;
+    color: black;
+}
+
+/* Estilo para achicar la tabla */
+table {
+    width: 50%; /* Ajusta el ancho según tus necesidades */
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+    border-color: #58595a;
+    border-width: 15px;
+}
+
+
+
+/* Reducir el ancho de la lista desplegable "Tiempo de Vuelo" */
+select#tiempo_vuelo {
+    width: 50px; /* Ajusta el ancho deseado */
+}
+
+
+/* Cambia el color de fondo cuando se pasa el mouse sobre los botones */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para el cuadro de texto de estado */
+#estadoCalificacion {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    font-weight: bold;
+    margin-left: 10px;
+    color: #111010;
+}
+
+#estadoCalificacion.verde {
+    background-color: green;
+    color: white;
+}
+
+#estadoCalificacion.rojo {
+    background-color: red;
+    color: white;
+}
+
+#estadoCalificacion.amarillo {
+    background-color: yellow;
+    color: black;
+}
+
+
+
+/* Centrar los datos de misión, alumno y tiempo de vuelo */
+#mision-container,
+#alumno-container,
+#tiempo_vuelo {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 25vh;
+    color: rgb(37, 54, 204);
+}
+
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-basis: calc(50% - 10px);
+}
+
+label {
+    width: 150px;
+    text-align: right;
+    margin-right: 30px;
+}
+
+select, input[type="date"] {
+    width: 80px;
+}
+.form-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+/* Estilo del campo de fecha */
+.custom-date input[type="date"] {
+    background: transparent; /* Fondo transparente */
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+    /* Ajusta el ancho del campo de fecha */
+    width: 120px; /* Cambia el valor según tus preferencias */
+}
+
+/* Estilo específico para el indicador del calendario */
+.custom-date input[type="date"]::-webkit-calendar-picker-indicator {
+    /* Fondo transparente con una ligera opacidad */
+    background-color: rgba(173, 224, 243, 0.9); /* Cambia el valor de la opacidad según tus preferencias */
+    /* Otros estilos */
+    color: #007bff;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    margin-left: 10px;
+}
+
+
+/* Estilo específico para los números de día en el calendario */
+/* Estilo específico para los números de día en el calendario */
+.custom-date input[type="date"]::-webkit-calendar-date {
+    color: #333; /* Color del número del día */
+    font-weight: bold; /* Estilo de fuente en negrita para los números de día */
+    font-family: "Impact", sans-serif; /* Cambia el tipo de letra según tus preferencias */
+    font-size: 16px; /* Tamaño de fuente de los números de día */
+}
+

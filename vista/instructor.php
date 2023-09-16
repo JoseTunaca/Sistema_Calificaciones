@@ -3,6 +3,7 @@ session_start();
 include '../includes/navbar.php';
 
 $name = $_SESSION['usuario'];
+$apellido =$_SESSION['apellido'];
 $rol_db = $_SESSION['rol']; // Obtener el rol desde la sesión
 
 // Para no ingresar al panel de forma local.
@@ -30,9 +31,9 @@ if (!isset($_SESSION['usuario'])) {
     <div class="image-container">
         <?php 
         if ($rol_db == 1) { // Rol Admin
-            echo "<h1>Bienvenido señor $name (Admin)</h1>";
+            echo "<h1>Bienvenido señor $name $apellido (Admin)</h1>";
         } elseif ($rol_db == 2) { // Rol User
-            echo "<h1>Bienvenido  $name (Instructor)</h1>";
+            echo "<h1>Bienvenido  $name $apellido(Instructor)</h1>";
         }
 
         // Imprimir el valor del rol para depuración
@@ -43,6 +44,7 @@ if (!isset($_SESSION['usuario'])) {
     </div>
 </body>
 </html>
+
 
 
 
