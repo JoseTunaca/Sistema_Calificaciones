@@ -1,7 +1,13 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 include '../includes/navbar.php';
 include '../includes/conexion.php';
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 
 $name = $_SESSION['usuario'];
 $apellido = $_SESSION['apellido'];
@@ -24,30 +30,10 @@ $sumaS = 0;
 $sumaL = 0;
 $sumaNL = 0;
 $sumaI = 0;
-
-// Manejar la solicitud POST para guardar la calificación
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recopila los datos del formulario
-    $alumno_id = $_POST['alumno']; // Cambié 'alumno' a 'alumno_id'
-    $mision = $_POST['mision'];
-    $tiempo_vuelo = $_POST['tiempo_vuelo'];
-    $fecha = $_POST['fecha'];
-    $calcularCalificacion = $_POST['calcularCalificacion'];
-    
-    // Realiza la inserción en la base de datos
-    $sql = "INSERT INTO calificaciones (calificacion, alumno_id, mision, tiempo_vuelo, fecha) VALUES ('$calcularCalificacion', '$alumno_id', '$mision', '$tiempo_vuelo', '$fecha')";
-    
-    if (mysqli_query($conexion, $sql)) {
-        echo "Calificación guardada correctamente.";
-    } else {
-        echo("Error al guardar la calificación: " . mysqli_error($conexion));
-    }
-}
-
-
-
-
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -126,16 +112,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </span>
             </div>
             <br><br>
+            <input type="hidden" id="calificacionFinal" name="calificacionFinal" value="">
+
             <br><br>
                 <button type="button" id="calcularCalificacion" style="display: none;">Calcular Calificación</button>
                 <button type="submit" id="guardarCalificacion" style="display: none;">Guardar Calificación</button>
+                </form>
+
+              <form action="generar_pdf.php" method="POST" target="_blank" id="gnerarPdfForm">
+    <!-- Agrega los campos de entrada que desees enviar al archivo PDF -->
+    <input type="hidden" name="alumno" value="<?php echo isset($_POST['alumno']) ? $_POST['alumno'] : ''; ?>">
+    <input type="hidden" name="mision" value="<?php echo isset($_POST['mision']) ? $_POST['mision'] : ''; ?>">
+    <input type="hidden" name="tiempo_vuelo" value="<?php echo isset($_POST['tiempo_vuelo']) ? $_POST['tiempo_vuelo'] : ''; ?>">
+    <input type="hidden" name="fecha" value="<?php echo isset($_POST['fecha']) ? $_POST['fecha'] : ''; ?>">
+    <input type="hidden" name="calificacionFinal" value="<?php echo isset($_POST['calificacionFinal']) ? $_POST['calificacionFinal'] : ''; ?>">
+
+    <!-- Resto de tus campos y elementos de formulario aquí -->
+
+    <button type="submit" name="generar_pdf">Generar PDF</button> <!-- Botón para generar el PDF -->
+</form>
+
+
     </form>
 </div>
 <br><br>
 <br><br>
 <br><br>
 <br><br>
-
+<div id="mensaje-guardado" style="display: none;">
+    <p>Su calificación se ha guardado correctamente</p>
+    <button id="boton-aceptar">Aceptar</button>
+</div>
 <div id="calificacion-container" style="display: none;">
     <table border="1">
         <thead>
@@ -176,6 +183,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </tbody>
     </table>
 </div>
+
+
             <!-- Resto del formulario para ingresar la calificación -->
             <!-- Agrega aquí los campos necesarios para ingresar la información de la calificación -->
                        
@@ -228,7 +237,8 @@ function calcularCalificacion() {
     } else {
         estadoTexto = 'Reprobado';
     }
-
+    //Almacena el valor calculado en el campo oculto
+    $('#calificacionFinal').val(calificacionFinal.toFixed(2));
     // Actualizar el estado de calificación en el cuadro de estado
     actualizarEstadoCalificacion(estadoTexto);
     return calificacionFinal.toFixed(2);
@@ -280,7 +290,7 @@ $('#calcularCalificacion').click(function () {
         var resultadoCalificacion = calcularCalificacion(radiosSeleccionados);
 
         // Mostrar las sumatorias de cada columna
-        mostrarSumatorias(radiosSeleccionados);
+       // mostrarSumatorias(radiosSeleccionados);
 
         // Actualizar la calificación en la página
         $('#porcentajePerfecto').text(resultadoCalificacion);
@@ -311,6 +321,7 @@ $(document).ready(function () {
         var mision = $('#mision').val();
         var tiempo_vuelo = $('#tiempo_vuelo').val();
         var fecha = $('#fecha').val();
+        var calificacionFinal = $('#calificacionFinal').val();
 
         // Validar que se hayan seleccionado valores
         if (alumno_id === '' || mision === '' || tiempo_vuelo === '' || fecha === '') {
@@ -323,7 +334,9 @@ $(document).ready(function () {
             alumno: alumno_id,
             mision: mision,
             tiempo_vuelo: tiempo_vuelo,
-            fecha: fecha
+            fecha: fecha,
+            calificacionFinal: calificacionFinal
+
         };
 
         // Realizar la solicitud POST al servidor para guardar la calificación
@@ -333,14 +346,17 @@ $.ajax({
     url: 'guardar_calificacion.php',
     data: datos,
     success: function (response) {
+        console.log('exito al guardar');
         if (response.success) {
             // Éxito al guardar la calificación
+            $('#mensaje-guardado').css('display', 'block');
             alert(response.message);
             // Limpia los campos del formulario después de guardar la calificación
             $('#alumno').val('');
             $('#mision').val('');
             $('#tiempo_vuelo').val('');
             $('#fecha').val('');
+            $('#calificacionFinal').val('');
             // También puedes realizar otras acciones después de guardar
         } else {
             // Error al guardar la calificación
@@ -416,13 +432,28 @@ $('table').on('click', '.eliminar-seleccion', function() {
         var fila = $(this).closest('tr'); // Obtener la fila actual
         fila.find('input[type="radio"]').prop('checked', false); // Desmarcar todos los radios en esa fila
     });
-        </script>
+
+ // Manejador de eventos para el botón "Generar PDF"
+ $('#generarPdfForm').submit(function (e) {
+        e.preventDefault(); // Evitar el envío del formulario por defecto
+        // Obtener los datos del formulario para el PDF
+        var datosPdf = $(this).serialize();
+
+        // Realizar la solicitud POST al servidor para generar el PDF
+        $.ajax({
+            type: 'POST',
+            url: 'generar_pdf.php',
+            data: datosPdf,
+            success: function (response) {
+                // Manejar la respuesta del servidor (puede ser la lógica de descarga del PDF)
+                // Por ejemplo, abrir el PDF en una nueva ventana o descargarlo automáticamente
+            },
+        });
+    });
+ </script>
     </div>
 </body>
 </html>
-
-
-
 
 
 

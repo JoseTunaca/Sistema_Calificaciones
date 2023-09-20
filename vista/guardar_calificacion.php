@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mision = $_POST['mision'];
     $tiempo_vuelo = $_POST['tiempo_vuelo'];
     $fecha = $_POST['fecha'];
+    $calcularCalificacion = $_POST['calificacionFinal'];
     
     // Puedes agregar un echo aquí para ver los datos que estás recibiendo
     // Esto es útil para depurar y verificar los datos
@@ -19,9 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Misión: " . $mision . "<br>";
     echo "Tiempo de Vuelo: " . $tiempo_vuelo . "<br>";
     echo "Fecha: " . $fecha . "<br>";
+    echo "Calificación Final: " . $calcularCalificacion . "<br>";
 
     // Realiza la inserción en la base de datos
-    $sql = "INSERT INTO calificaciones (alumno_id, mision, tiempo_vuelo, fecha) VALUES ('$alumno_id', '$mision', '$tiempo_vuelo', '$fecha')";
+    $sql = "INSERT INTO calificaciones (calificacionFinal, alumno_id, mision, tiempo_vuelo, fecha) VALUES ('$calcularCalificacion', '$alumno_id', '$mision', '$tiempo_vuelo', '$fecha')";
     
     if (mysqli_query($conexion, $sql)) {
         $response['success'] = true;
@@ -39,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 header('Content-Type: application/json');
 echo json_encode($response);
 ?>
+
 
 
 
