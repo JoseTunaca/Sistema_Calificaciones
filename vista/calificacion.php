@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+ini_set('error_log', '/ruta/al/archivo_de_registro_de_errores.log');
 session_start();
 include '../includes/navbar.php';
 include '../includes/conexion.php';
@@ -117,23 +118,11 @@ $sumaI = 0;
             <br><br>
                 <button type="button" id="calcularCalificacion" style="display: none;">Calcular Calificación</button>
                 <button type="submit" id="guardarCalificacion" style="display: none;">Guardar Calificación</button>
+                <button type="submit" id="generarPdfform">Generar PDF</button> <!-- Botón para generar el PDF -->
                 </form>
-
-              <form action="generar_pdf.php" method="POST" target="_blank" id="gnerarPdfForm">
-    <!-- Agrega los campos de entrada que desees enviar al archivo PDF -->
-    <input type="hidden" name="alumno" value="<?php echo isset($_POST['alumno']) ? $_POST['alumno'] : ''; ?>">
-    <input type="hidden" name="mision" value="<?php echo isset($_POST['mision']) ? $_POST['mision'] : ''; ?>">
-    <input type="hidden" name="tiempo_vuelo" value="<?php echo isset($_POST['tiempo_vuelo']) ? $_POST['tiempo_vuelo'] : ''; ?>">
-    <input type="hidden" name="fecha" value="<?php echo isset($_POST['fecha']) ? $_POST['fecha'] : ''; ?>">
-    <input type="hidden" name="calificacionFinal" value="<?php echo isset($_POST['calificacionFinal']) ? $_POST['calificacionFinal'] : ''; ?>">
-
-    <!-- Resto de tus campos y elementos de formulario aquí -->
-
-    <button type="submit" name="generar_pdf">Generar PDF</button> <!-- Botón para generar el PDF -->
-</form>
+              <!-- Resto de tus campos y elementos de formulario aquí -->
 
 
-    </form>
 </div>
 <br><br>
 <br><br>
@@ -435,20 +424,45 @@ $('table').on('click', '.eliminar-seleccion', function() {
 
  // Manejador de eventos para el botón "Generar PDF"
  $('#generarPdfForm').submit(function (e) {
-        e.preventDefault(); // Evitar el envío del formulario por defecto
+        
         // Obtener los datos del formulario para el PDF
-        var datosPdf = $(this).serialize();
+         // Obtener los datos del formulario
+        var alumno_id = $('#alumno').val();
+        var mision = $('#mision').val();
+        var tiempo_vuelo = $('#tiempo_vuelo').val();
+        var fecha = $('#fecha').val();
+        var calificacionFinal = $('#calificacionFinal').val();
 
+        // Validar que se hayan seleccionado valores
+        if (alumno_id === '' || mision === '' || tiempo_vuelo === '' || fecha === '') {
+            alert('Por favor, completa todos los campos antes de guardar la calificación.');
+            return;
+        }
+
+        // Crear un objeto de datos para enviar al servidor
+        var datosPdf = {
+            alumno: alumno_id,
+            mision: mision,
+            tiempo_vuelo: tiempo_vuelo,
+            fecha: fecha,
+            calificacionFinal: calificacionFinal
+
+        };
+console.log(datosPdf);
         // Realizar la solicitud POST al servidor para generar el PDF
-        $.ajax({
-            type: 'POST',
-            url: 'generar_pdf.php',
-            data: datosPdf,
-            success: function (response) {
-                // Manejar la respuesta del servidor (puede ser la lógica de descarga del PDF)
-                // Por ejemplo, abrir el PDF en una nueva ventana o descargarlo automáticamente
-            },
-        });
+       // Agrega esta parte a tu código JavaScript en el archivo HTML
+//$.ajax({
+   // type: 'POST',
+  //  url: 'generar_pdf.php',
+   // data: datosPdf,
+   //  success: function (response) {
+   //    console.log(response); 
+        // Muestra la respuesta en la consola del navegador
+  //  },
+  //  error: function (xhr, status, error) {
+   //     console.error(xhr.responseText); // En caso de un error, muestra los detalles en la consola
+  //  }
+//});
     });
  </script>
     </div>
