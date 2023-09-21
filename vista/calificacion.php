@@ -56,7 +56,7 @@ $sumaI = 0;
     }
     ?>
 
-    <form action="calificacion.php" method="POST">
+    <form>
         <div class="form-row">
             <div class="form-group">
                 <label for="alumno">Selecciona al alumno:</label>
@@ -117,8 +117,8 @@ $sumaI = 0;
 
             <br><br>
                 <button type="button" id="calcularCalificacion" style="display: none;">Calcular Calificación</button>
-                <button type="submit" id="guardarCalificacion" style="display: none;">Guardar Calificación</button>
-                <button type="submit" id="generarPdfform">Generar PDF</button> <!-- Botón para generar el PDF -->
+                <button  id="guardarCalificacion" style="display: none;">Guardar Calificación</button>
+                <button  id="generarPdfform">Generar PDF</button> <!-- Botón para generar el PDF -->
                 </form>
               <!-- Resto de tus campos y elementos de formulario aquí -->
 
@@ -340,12 +340,7 @@ $.ajax({
             // Éxito al guardar la calificación
             $('#mensaje-guardado').css('display', 'block');
             alert(response.message);
-            // Limpia los campos del formulario después de guardar la calificación
-            $('#alumno').val('');
-            $('#mision').val('');
-            $('#tiempo_vuelo').val('');
-            $('#fecha').val('');
-            $('#calificacionFinal').val('');
+            //agregar cambio de color de boton guardar
             // También puedes realizar otras acciones después de guardar
         } else {
             // Error al guardar la calificación
@@ -355,6 +350,54 @@ $.ajax({
 });
 
 });
+// Manejador de eventos para los botones "Eliminar Selección"
+$('table').on('click', '.eliminar-seleccion', function() {
+        var fila = $(this).closest('tr'); // Obtener la fila actual
+        fila.find('input[type="radio"]').prop('checked', false); // Desmarcar todos los radios en esa fila
+    });
+
+ // Manejador de eventos para el botón "Generar PDF"
+ $('#generarPdfform').click(function (e) {
+        console.log('Generando PDF...');
+        // Obtener los datos del formulario para el PDF
+         // Obtener los datos del formulario
+        var alumno_id = $('#alumno').val();
+        var mision = $('#mision').val();
+        var tiempo_vuelo = $('#tiempo_vuelo').val();
+        var fecha = $('#fecha').val();
+        var calificacionFinal = $('#calificacionFinal').val();
+
+        // Validar que se hayan seleccionado valores
+        if (alumno_id === '' || mision === '' || tiempo_vuelo === '' || fecha === '') {
+            alert('Por favor, completa todos los campos antes de guardar la calificación.');
+            return;
+        }
+
+        // Crear un objeto de datos para enviar al servidor
+        var datosPdf = {
+            alumno: alumno_id,
+            mision: mision,
+            tiempo_vuelo: tiempo_vuelo,
+            fecha: fecha,
+            calificacionFinal: calificacionFinal
+
+        };
+console.log(datosPdf);
+       //  Realizar la solicitud POST al servidor para generar el PDF
+        //Agrega esta parte a tu código JavaScript en el archivo HTML
+$.ajax({
+    type: 'POST',
+   url: 'generar_pdf.php',
+   data: datosPdf,
+    success: function (response) {
+    console.log(response); 
+ //Muestra la respuesta en la consola del navegador
+    },
+    error: function (xhr, status, error) {
+        console.error(xhr.responseText); // En caso de un error, muestra los detalles en la consola
+    }
+});
+    });
 
     });
 
@@ -416,54 +459,8 @@ function obtenerRadiosSeleccionados() {
     });
     return radiosSeleccionados;
 }
-// Manejador de eventos para los botones "Eliminar Selección"
-$('table').on('click', '.eliminar-seleccion', function() {
-        var fila = $(this).closest('tr'); // Obtener la fila actual
-        fila.find('input[type="radio"]').prop('checked', false); // Desmarcar todos los radios en esa fila
-    });
 
- // Manejador de eventos para el botón "Generar PDF"
- $('#generarPdfForm').submit(function (e) {
-        
-        // Obtener los datos del formulario para el PDF
-         // Obtener los datos del formulario
-        var alumno_id = $('#alumno').val();
-        var mision = $('#mision').val();
-        var tiempo_vuelo = $('#tiempo_vuelo').val();
-        var fecha = $('#fecha').val();
-        var calificacionFinal = $('#calificacionFinal').val();
 
-        // Validar que se hayan seleccionado valores
-        if (alumno_id === '' || mision === '' || tiempo_vuelo === '' || fecha === '') {
-            alert('Por favor, completa todos los campos antes de guardar la calificación.');
-            return;
-        }
-
-        // Crear un objeto de datos para enviar al servidor
-        var datosPdf = {
-            alumno: alumno_id,
-            mision: mision,
-            tiempo_vuelo: tiempo_vuelo,
-            fecha: fecha,
-            calificacionFinal: calificacionFinal
-
-        };
-console.log(datosPdf);
-        // Realizar la solicitud POST al servidor para generar el PDF
-       // Agrega esta parte a tu código JavaScript en el archivo HTML
-//$.ajax({
-   // type: 'POST',
-  //  url: 'generar_pdf.php',
-   // data: datosPdf,
-   //  success: function (response) {
-   //    console.log(response); 
-        // Muestra la respuesta en la consola del navegador
-  //  },
-  //  error: function (xhr, status, error) {
-   //     console.error(xhr.responseText); // En caso de un error, muestra los detalles en la consola
-  //  }
-//});
-    });
  </script>
     </div>
 </body>

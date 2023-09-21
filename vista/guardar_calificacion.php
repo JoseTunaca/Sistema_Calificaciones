@@ -16,11 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Puedes agregar un echo aquí para ver los datos que estás recibiendo
     // Esto es útil para depurar y verificar los datos
-    echo "Alumno ID: " . $alumno_id . "<br>";
-    echo "Misión: " . $mision . "<br>";
-    echo "Tiempo de Vuelo: " . $tiempo_vuelo . "<br>";
-    echo "Fecha: " . $fecha . "<br>";
-    echo "Calificación Final: " . $calcularCalificacion . "<br>";
+    
 
     // Realiza la inserción en la base de datos
     $sql = "INSERT INTO calificaciones (calificacionFinal, alumno_id, mision, tiempo_vuelo, fecha) VALUES ('$calcularCalificacion', '$alumno_id', '$mision', '$tiempo_vuelo', '$fecha')";
@@ -36,9 +32,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $response['success'] = false;
     $response['message'] = "Método de solicitud incorrecto. Debe ser POST.";
 }
-
 // Devuelve la respuesta como JSON
 header('Content-Type: application/json');
+//echo "Alumno ID: " . $alumno_id . "<br>";
+   // echo "Misión: " . $mision . "<br>";
+   // echo "Tiempo de Vuelo: " . $tiempo_vuelo . "<br>";
+   // echo "Fecha: " . $fecha . "<br>";
+   // echo "Calificación Final: " . $calcularCalificacion . "<br>";
 echo json_encode($response);
 ?>
 
